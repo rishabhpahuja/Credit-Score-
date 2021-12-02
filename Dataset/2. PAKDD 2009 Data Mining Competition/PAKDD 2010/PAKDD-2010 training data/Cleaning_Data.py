@@ -4,6 +4,7 @@ from pandas.io.sql import DatabaseError
 
 orig_data=pd.read_csv('PAKDD2010_Modeling_Data.txt',encoding='latin1',sep='\t',header=None)
 y_label=orig_data.loc[:,len(orig_data.columns)-1]
+print(type(y_label))
 orig_data=orig_data.drop(orig_data.columns[[1,10,11,12,13,14,15,34,35,36,51,52,53]],axis=1)
 # orig_data.loc[:,3]=orig_data[3].replace(['Web','Carga'],[0,1])
 
@@ -33,5 +34,7 @@ orig_data.loc[:,5]=orig_data[5].replace(' ',0)
 print('aaaaaaaaaaaaaaaaaaaaaaaa',np.where(orig_data==' '))
 orig_data=pd.get_dummies(orig_data,columns=[3,6])
 # print((orig_data[17].isnull().any().any()))
+
 print(orig_data)
 orig_data.to_csv('Cleaned_Data.csv')
+y_label.to_csv('Data_labels.csv')
