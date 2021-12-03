@@ -65,10 +65,11 @@ Outlier Detection using DBSCAN
 '''
 i=1
 while True:
-    DBSCAN_model=DBSCAN(eps=i, min_samples=5).fit(german_dataset)
+    DBSCAN_model=DBSCAN(eps=i, min_samples=5).fit(new_german_dataset)
     labels=DBSCAN_model.labels_
     i+=1
-    if len(np.where(labels==-1)[0])<=0.055*len(german_dataset) and len(np.where(labels==-1)[0])>=0.045*len(german_dataset):
+    print(len(np.where(labels==-1)[0]))
+    if len(np.where(labels==-1)[0])<=0.05*len(new_german_dataset) and len(np.where(labels==-1)[0])>=0.04*len(new_german_dataset):
         print(len(np.where(labels==-1)[0]))
         break
 # german_dataset_no_outlier=new_german_dataset.loc[np.where(labels!=-1),:]
