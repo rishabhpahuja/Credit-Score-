@@ -69,7 +69,7 @@ while True:
     labels=DBSCAN_model.labels_
     i+=1
     print(len(np.where(labels==-1)[0]))
-    if len(np.where(labels==-1)[0])<=0.05*len(thomas_dataset) and len(np.where(labels==-1)[0])>=0.03*len(thomas_dataset):
+    if len(np.where(labels==-1)[0])<=0.05*len(new_thomas_dataset) and len(np.where(labels==-1)[0])>=0.03*len(new_thomas_dataset):
         print(len(np.where(labels==-1)[0]))
         break
 # german_dataset_no_outlier=new_thomas_dataset.loc[np.where(labels!=-1),:]
