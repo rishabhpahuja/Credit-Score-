@@ -3,15 +3,16 @@ import pandas as pd
 from csv import writer
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
 import matplotlib.pyplot as plt
 from sklearn.cluster import DBSCAN
 from sklearn.decomposition import PCA
 
-def plot_score(scores,a):
-    plt.plot(range(1,35),scores)
-    plt.title(a)
-    plt.show()
+# def plot_score(scores,a):
+#     plt.plot(range(1,35),scores)
+#     plt.title(a)
+#     plt.show()
     
 def plot_outliers(new_X_data,labels):
     plt.subplot(1, 2, 1)
@@ -52,7 +53,18 @@ def k_nearest(X_train,X_test,y_train,y_test,a):
         knn.fit(X_train,y_train)
         y_pred=knn.predict(X_test)
         scores.append(metrics.accuracy_score(y_test,y_pred))
-    plot_score(scores,a)
+
+    plt.plot(range(1,35),scores)
+    plt.title(a)
+    plt.show()
+    #plot_score(scores,a)
+
+def Logistic_Reg(X_train,X_test,y_train,y_test,a):
+    clf = LogisticRegression(random_state=0).fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+    print('Logistic Regression Accuracy = ', metrics.accuracy_score(y_test,y_pred))
+
+
 
 def main(X_data,y_label):
     new_X_data = pca(X_data)
@@ -61,7 +73,7 @@ def main(X_data,y_label):
     X_train,X_test,y_train,y_test=train_test_split(new_X_data,y_label,test_size=0.2,random_state=42)
     tit = 'With outlier'
     k_nearest(X_train,X_test,y_train,y_test,tit)
-
+    Logistic_Reg(X_train,X_test,y_train,y_test,tit)
     '''
     KNN after outlier detection
     '''
@@ -75,10 +87,10 @@ def main(X_data,y_label):
     X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier=train_test_split(X_datatset_no_outlier,y_label_no_outlier,test_size=0.2,random_state=42)
     tit = 'Without outlier'
     k_nearest(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier,tit)
-
+    Logistic_Reg(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier,tit)
 
 if __name__ == '__main__':
-    australian_dataset=pd.read_csv('uci-australian.dat',header=None,sep=' ')
+    australian_dataset=pd.read_csv('./Datasets/uci-australian.dat',header=None,sep=' ')
     print(australian_dataset)
     y_label=australian_dataset.loc[:,len(australian_dataset.columns)-1]
     X_data=australian_dataset.drop(australian_dataset.columns[[len(australian_dataset.columns)-1]],axis=1)
