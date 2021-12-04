@@ -82,6 +82,9 @@ plt.subplot(1, 2, 1)
 plt.title('With Outlier')
 plt.plot(range(1,35),scores)
 
+'''
+Removing Outliers using DBSCAN
+'''
 
 i=5
 while True:
