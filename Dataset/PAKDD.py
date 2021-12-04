@@ -64,11 +64,11 @@ plt.plot(range(1,35),scores)
 
 i=1
 while True:
-    DBSCAN_model=DBSCAN(eps=i, min_samples=10).fit(pakdd_data)
+    DBSCAN_model=DBSCAN(eps=i, min_samples=10).fit(new_pakdd_data)
     labels=DBSCAN_model.labels_
     i+=1
     print(len(np.where(labels==-1)[0]))
-    if len(np.where(labels==-1)[0])<=0.05*len(pakdd_data) and len(np.where(labels==-1)[0])>=0.03*len(pakdd_data):
+    if len(np.where(labels==-1)[0])<=0.03*len(new_pakdd_data) and len(np.where(labels==-1)[0])>=0.01*len(new_pakdd_data):
         print(len(np.where(labels==-1)[0]))
         break
 
