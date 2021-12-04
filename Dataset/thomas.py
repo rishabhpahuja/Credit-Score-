@@ -22,7 +22,7 @@ from sklearn.cluster import DBSCAN
 # thomas_label=thomas_dataset.loc[:,len(thomas_dataset.columns)-1]
 # print(thomas_dataset)
 
-thomas_dataset=pd.read_csv('Thomas_oneHot.csv',header=None)
+thomas_dataset=pd.read_csv('Thomas_oneHot.csv')
 thomas_label=thomas_dataset.loc[:,'BAD']
 thomas_dataset=thomas_dataset.drop(['BAD'],axis=1)
 
@@ -65,11 +65,11 @@ Outlier Detection using DBSCAN
 '''
 i=1
 while True:
-    DBSCAN_model=DBSCAN(eps=i, min_samples=100).fit(new_thomas_dataset)
+    DBSCAN_model=DBSCAN(eps=i, min_samples=120).fit(new_thomas_dataset)
     labels=DBSCAN_model.labels_
-    i+=1
+    i+=5
     print(len(np.where(labels==-1)[0]))
-    if len(np.where(labels==-1)[0])<=0.05*len(new_thomas_dataset) and len(np.where(labels==-1)[0])>=0.03*len(new_thomas_dataset):
+    if len(np.where(labels==-1)[0])<=0.06*len(new_thomas_dataset) and len(np.where(labels==-1)[0])>=0.04*len(new_thomas_dataset):
         print(len(np.where(labels==-1)[0]))
         break
 # german_dataset_no_outlier=new_thomas_dataset.loc[np.where(labels!=-1),:]
@@ -86,15 +86,15 @@ for k in range(1,35):
     y_pred_no_outlier=knn.predict(X_test_no_outlier)
     scores_no_outlier.append(metrics.accuracy_score(y_test_no_outlier,y_pred_no_outlier))
 
-cov=(thomas_datatset_no_outlier.T@thomas_datatset_no_outlier)/(len(thomas_datatset_no_outlier)-1)
-sorted_eig_vals,sorted_eig_vecs=np.linalg.eig(cov)
+# cov=(thomas_datatset_no_outlier.T@thomas_datatset_no_outlier)/(len(thomas_datatset_no_outlier)-1)
+# sorted_eig_vals,sorted_eig_vecs=np.linalg.eig(cov)
 
-variance=np.zeros(len(thomas_datatset_no_outlier.columns))
-for i in range(len(thomas_datatset_no_outlier.columns)):
-    variance[i]=sum(sorted_eig_vals[:i+1])/sum(sorted_eig_vals)
-print(variance)
+# variance=np.zeros(len(thomas_datatset_no_outlier.columns))
+# for i in range(len(thomas_datatset_no_outlier.columns)):
+#     variance[i]=sum(sorted_eig_vals[:i+1])/sum(sorted_eig_vals)
+# print(variance)
 
-new_thomas_dataset=thomas_dataset@sorted_eig_vecs[:,:2]
+# new_thomas_dataset=thomas_dataset@sorted_eig_vecs[:,:2]
 
 
 plt.subplot(1, 2, 2)
