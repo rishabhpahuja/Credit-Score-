@@ -4,10 +4,18 @@ from csv import writer
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
 from sklearn import metrics
 import matplotlib.pyplot as plt
 from sklearn.cluster import DBSCAN
 from sklearn.decomposition import PCA
+from sklearn.model_selection import RepeatedStratifiedKFold
+from skopt import BayesSearchCV
 
 # def plot_score(scores,a):
 #     plt.plot(range(1,35),scores)
@@ -59,12 +67,60 @@ def k_nearest(X_train,X_test,y_train,y_test,a):
     plt.show()
     #plot_score(scores,a)
 
-def Logistic_Reg(X_train,X_test,y_train,y_test,a):
+def Logistic_Reg(X_train,X_test,y_train,y_test):
     clf = LogisticRegression(random_state=0).fit(X_train, y_train)
     y_pred = clf.predict(X_test)
     print('Logistic Regression Accuracy = ', metrics.accuracy_score(y_test,y_pred))
 
+    # params = dict()
+    # params['C'] = (1e-6, 100.0, 'log-uniform')
+    # # define evaluation
+    # cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=1)
+    # # define the search
+    # search = BayesSearchCV(estimator=LogisticRegression(), search_spaces=params, n_jobs=-1, cv=cv)
+    # # perform the search
+    # search.fit(X_train, y_train)
+    # # report the best result
+    # print(search.best_score_)
 
+
+def adaboost_classifier(X_train,X_test,y_train,y_test):
+    clf = AdaBoostClassifier(n_estimators=100, random_state=42)
+    clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+    print('Adaboost classifier accuracy: ', metrics.accuracy_score(y_test,y_pred))
+
+def random_forest(X_train,X_test,y_train,y_test):
+    clf = RandomForestClassifier(max_depth=150, random_state=42)
+    clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+    print('Random Forest classifier accuracy: ', metrics.accuracy_score(y_test,y_pred))
+
+def gaussian_nb(X_train,X_test,y_train,y_test):
+    clf = GaussianNB()
+    clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+    print('Gaussian Naive Bayes\' classifier accuracy: ', metrics.accuracy_score(y_test,y_pred))
+
+def svm(X_train,X_test,y_train,y_test):
+    clf = make_pipeline(StandardScaler(), SVC(gamma='auto'))
+    clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+    print('Support Vector Machine classifier accuracy: ', metrics.accuracy_score(y_test,y_pred))
+
+    # params = dict()
+    # params['C'] = (1e-6, 100.0, 'log-uniform')
+    # params['gamma'] = (1e-6, 100.0, 'log-uniform')
+    # params['degree'] = (1,5)
+    # params['kernel'] = ['linear', 'poly', 'rbf', 'sigmoid']
+    # # define evaluation
+    # cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=1)
+    # # define the search
+    # search = BayesSearchCV(estimator=SVC(), search_spaces=params, n_jobs=-1, cv=cv)
+    # # perform the search
+    # search.fit(X_train, y_train)
+    # # report the best result
+    # print(search.best_score_)
 
 def main(X_data,y_label):
     new_X_data = pca(X_data)
@@ -73,7 +129,12 @@ def main(X_data,y_label):
     X_train,X_test,y_train,y_test=train_test_split(new_X_data,y_label,test_size=0.2,random_state=42)
     tit = 'With outlier'
     k_nearest(X_train,X_test,y_train,y_test,tit)
-    Logistic_Reg(X_train,X_test,y_train,y_test,tit)
+    Logistic_Reg(X_train,X_test,y_train,y_test)
+    adaboost_classifier(X_train,X_test,y_train,y_test)
+    random_forest(X_train,X_test,y_train,y_test)
+    gaussian_nb(X_train,X_test,y_train,y_test)
+    #svm(X_train,X_test,y_train,y_test)
+
     '''
     KNN after outlier detection
     '''
@@ -87,8 +148,11 @@ def main(X_data,y_label):
     X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier=train_test_split(X_datatset_no_outlier,y_label_no_outlier,test_size=0.2,random_state=42)
     tit = 'Without outlier'
     k_nearest(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier,tit)
-    Logistic_Reg(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier,tit)
-
+    Logistic_Reg(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+    adaboost_classifier(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+    random_forest(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+    gaussian_nb(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+    #svm(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
 if __name__ == '__main__':
     australian_dataset=pd.read_csv('./Datasets/uci-australian.dat',header=None,sep=' ')
     print(australian_dataset)
