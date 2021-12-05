@@ -8,17 +8,19 @@ def aus():
     X_data=australian_dataset.drop(australian_dataset.columns[[len(australian_dataset.columns)-1]],axis=1)
     min_outliers = 0.01
     max_outliers = 0.06
+    Samples = 100
     #main(X_data,y_label)
-    return X_data,y_label, min_outliers, max_outliers
+    return X_data,y_label, min_outliers, max_outliers, Samples
 
 # German data
 def german():
-    german_dataset=pd.read_csv('./Datasets/german_final.csv',header=None)
+    german_dataset=pd.read_csv('./Datasets/uci-german.csv',header=None)
     german_label=german_dataset.loc[:,len(german_dataset.columns)-1]
     german_dataset=german_dataset.drop(german_dataset.columns[[len(german_dataset.columns)-1]],axis=1)
     min_outliers = 0.01
     max_outliers = 0.06
-    return german_dataset, german_label, min_outliers, max_outliers
+    Samples = 100
+    return german_dataset, german_label, min_outliers, max_outliers, Samples
 
 # PAKDD data
 def pakdd():
@@ -27,7 +29,8 @@ def pakdd():
     pakdd_label = pakdd_label.loc[:,len(pakdd_label.columns)-1]
     min_outliers = 0.01
     max_outliers = 0.06
-    return pakdd_data, pakdd_label, min_outliers, max_outliers
+    Samples = 100
+    return pakdd_data, pakdd_label, min_outliers, max_outliers, Samples
 
 # Thomas data
 def thomas():    
@@ -36,7 +39,8 @@ def thomas():
     thomas_dataset=thomas_dataset.drop(['BAD'],axis=1)
     min_outliers = 0.01
     max_outliers = 0.06
-    return thomas_dataset, thomas_label, min_outliers, max_outliers
+    Samples = 100
+    return thomas_dataset, thomas_label, min_outliers, max_outliers, Samples
 
 # Hmeq data
 def hmeq():
@@ -46,7 +50,8 @@ def hmeq():
     hmeq_data=hmeq_data.drop(labels=['BAD'],axis=1)
     min_outliers = 0.01
     max_outliers = 0.06
-    return hmeq_data, hmeq_label, min_outliers, max_outliers
+    Samples = 100
+    return hmeq_data, hmeq_label, min_outliers, max_outliers, Samples
 
 # Japan data
 def japan():
@@ -55,7 +60,8 @@ def japan():
     japan_label = japan_label.loc[:,len(japan_label.columns)-1]
     min_outliers = 0.01
     max_outliers = 0.06
-    return japan_data,japan_label, min_outliers, max_outliers
+    Samples = 100
+    return japan_data,japan_label, min_outliers, max_outliers, Samples
 
 # mortgage data
 def mortgage():
@@ -65,7 +71,8 @@ def mortgage():
     morgage_data=morgage_data.drop(labels=['labels'],axis=1)
     min_outliers = 0.01
     max_outliers = 0.06
-    return morgage_data, morgage_label, min_outliers, max_outliers
+    Samples = 100
+    return morgage_data, morgage_label, min_outliers, max_outliers, Samples
 
 # econometric analysis data
 def eco():
@@ -74,4 +81,5 @@ def eco():
     econometric_data=econometric_data.drop(labels=['card'],axis=1)
     min_outliers = 0.01
     max_outliers = 0.06
-    return econometric_data, econometric_label, min_outliers, max_outliers
+    Samples = 100
+    return econometric_data, econometric_label, min_outliers, max_outliers, Samples
