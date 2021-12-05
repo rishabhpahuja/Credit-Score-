@@ -8,17 +8,20 @@ import numpy as np
 
 x,y = aus()
 x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2)
-
 model = keras.Sequential(
     [
-        layers.Dense(2, activation="relu", name="layer1"),
-        layers.Dense(3, activation="relu", name="layer2"),
-        layers.Dense(4, name="layer3"),
+        layers.Dense(64, activation="relu", name="layer1"),
+        layers.Dense(128, activation="relu", name="layer2"),
+        layers.Dense(1, activation="sigmoid", name="layer3")
     ]
 )
+model.compile(optimizer='Adam',loss='binary_crossentropy')
+model.fit(x_train.to_numpy(),y_train.to_numpy())
+y_pred = model.predict(x_test.to_numpy())
+y_pred[y_pred<0.5]=0
+y_pred[y_pred>=0.5]=1
 
-model.fit(x_train,y_train)
-y_pred = model.predict(x_test)
-score = metrics.accuracy_score(y_test,y_pred)
+print(y_pred)
+score = metrics.accuracy_score(y_test.to_numpy(),y_pred)
 print(score)
 
