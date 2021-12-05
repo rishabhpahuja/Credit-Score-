@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from csv import writer
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
@@ -11,7 +12,6 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from sklearn import metrics
-import matplotlib.pyplot as plt
 from sklearn.cluster import DBSCAN
 from sklearn.decomposition import PCA
 from sklearn.model_selection import RepeatedStratifiedKFold
@@ -33,14 +33,14 @@ def plot_outliers(new_X_data,labels):
     plt.plot(new_X_data.loc[:,0],new_X_data.loc[:,1],'x')
     plt.show()
 
-def outlier_removal(new_X_data,y_label):
+def outlier_removal(new_X_data,y_label,min_outliers,max_outliers):
     i=1
     while True:
         DBSCAN_model=DBSCAN(eps=i, min_samples=80).fit(new_X_data)
         labels=DBSCAN_model.labels_
         i+=1
         print(len(np.where(labels==-1)[0]))
-        if len(np.where(labels==-1)[0])<=0.06*len(new_X_data) and len(np.where(labels==-1)[0])>=0.01*len(new_X_data):
+        if len(np.where(labels==-1)[0])<=max_outliers*len(new_X_data) and len(np.where(labels==-1)[0])>=min_outliers*len(new_X_data):
             print('min dist dbscan:',i)
             break
     X_datatset_no_outlier=new_X_data.loc[labels!=-1,:]
@@ -122,7 +122,7 @@ def svm(X_train,X_test,y_train,y_test):
     # # report the best result
     # print(search.best_score_)
 
-def main(X_data,y_label):
+def main(X_data,y_label,min_outliers,max_outliers):
     new_X_data = pca(X_data)
 
     #Performing KNN
@@ -142,7 +142,7 @@ def main(X_data,y_label):
     '''
     Outlier Detection using DBSCAN
     '''
-    X_datatset_no_outlier, y_label_no_outlier = outlier_removal(new_X_data,y_label)
+    X_datatset_no_outlier, y_label_no_outlier = outlier_removal(new_X_data,y_label,min_outliers,max_outliers)
 
 
     X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier=train_test_split(X_datatset_no_outlier,y_label_no_outlier,test_size=0.2,random_state=42)
@@ -153,9 +153,12 @@ def main(X_data,y_label):
     random_forest(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
     gaussian_nb(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
     #svm(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+
 if __name__ == '__main__':
     australian_dataset=pd.read_csv('./Datasets/uci-australian.dat',header=None,sep=' ')
     print(australian_dataset)
     y_label=australian_dataset.loc[:,len(australian_dataset.columns)-1]
     X_data=australian_dataset.drop(australian_dataset.columns[[len(australian_dataset.columns)-1]],axis=1)
-    main(X_data,y_label)
+    min_outliers = 0.01
+    max_outliers = 0.06
+    main(X_data,y_label,min_outliers,max_outliers)
