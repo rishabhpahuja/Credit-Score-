@@ -15,7 +15,9 @@ from sklearn import metrics
 from sklearn.cluster import DBSCAN
 from sklearn.decomposition import PCA
 from sklearn.model_selection import RepeatedStratifiedKFold
-from skopt import BayesSearchCV
+#from skopt import BayesSearchCV
+from nn import *
+from Data_read import *
 
 # def plot_score(scores,a):
 #     plt.plot(range(1,35),scores)
@@ -133,8 +135,8 @@ def main(X_data,y_label,min_outliers,max_outliers):
     adaboost_classifier(X_train,X_test,y_train,y_test)
     random_forest(X_train,X_test,y_train,y_test)
     gaussian_nb(X_train,X_test,y_train,y_test)
-    #svm(X_train,X_test,y_train,y_test)
-
+    svm(X_train,X_test,y_train,y_test)
+    nn(X_train,X_test,y_train,y_test)
     '''
     KNN after outlier detection
     '''
@@ -152,13 +154,15 @@ def main(X_data,y_label,min_outliers,max_outliers):
     adaboost_classifier(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
     random_forest(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
     gaussian_nb(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
-    #svm(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+    svm(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+    nn(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
 
 if __name__ == '__main__':
-    australian_dataset=pd.read_csv('./Datasets/uci-australian.dat',header=None,sep=' ')
-    print(australian_dataset)
-    y_label=australian_dataset.loc[:,len(australian_dataset.columns)-1]
-    X_data=australian_dataset.drop(australian_dataset.columns[[len(australian_dataset.columns)-1]],axis=1)
-    min_outliers = 0.01
-    max_outliers = 0.06
+    # australian_dataset=pd.read_csv('./Datasets/uci-australian.dat',header=None,sep=' ')
+    # print(australian_dataset)
+    # y_label=australian_dataset.loc[:,len(australian_dataset.columns)-1]
+    # X_data=australian_dataset.drop(australian_dataset.columns[[len(australian_dataset.columns)-1]],axis=1)
+    X_data, y_label, min_outliers, max_outliers = aus()
     main(X_data,y_label,min_outliers,max_outliers)
+
+
