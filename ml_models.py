@@ -40,7 +40,7 @@ def outlier_removal(new_X_data,y_label,min_outliers,max_outliers, Samples):
     while True:
         DBSCAN_model=DBSCAN(eps=i, min_samples=Samples).fit(new_X_data)
         labels=DBSCAN_model.labels_
-        i+=1
+        i+=5
         print(len(np.where(labels==-1)[0]))
         if len(np.where(labels==-1)[0])<=max_outliers*len(new_X_data) and len(np.where(labels==-1)[0])>=min_outliers*len(new_X_data):
             print('min dist dbscan:',i)
@@ -158,11 +158,7 @@ def main(X_data,y_label,min_outliers,max_outliers, Samples):
     nn(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
 
 if __name__ == '__main__':
-    # australian_dataset=pd.read_csv('./Datasets/uci-australian.dat',header=None,sep=' ')
-    # print(australian_dataset)
-    # y_label=australian_dataset.loc[:,len(australian_dataset.columns)-1]
-    # X_data=australian_dataset.drop(australian_dataset.columns[[len(australian_dataset.columns)-1]],axis=1)
-    X_data, y_label, min_outliers, max_outliers, Samples = german()
+    X_data, y_label, min_outliers, max_outliers, Samples = japan()
     main(X_data,y_label,min_outliers,max_outliers, Samples)
 
 
