@@ -10,7 +10,7 @@ from ml_models import write_text_file
 
 # X_train,X_test,y_train,y_test = train_test_split(x,y,test_size=0.2)
 
-def nn(X_train,X_test,y_train,y_test):
+def nn(X_train,X_test,y_train,y_test,data_name,flag):
     model = keras.Sequential(
         [
             layers.Dense(64, activation="relu", name="layer1"),
@@ -25,8 +25,8 @@ def nn(X_train,X_test,y_train,y_test):
     y_pred[y_pred>=0.5]=1
 
     score = metrics.accuracy_score(y_test.to_numpy(),y_pred)
-    string = "Neural Network score: " + str(score)
+    string = "Neural Network score," + str(score) + ',' + data_name+','+flag
     write_text_file(string)
-    print("Neural Network score: ", score)
+    print("Neural Network score,", score)
     acc = score
     return acc
