@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from csv import writer
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
@@ -11,17 +12,45 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from sklearn import metrics
-import matplotlib.pyplot as plt
 from sklearn.cluster import DBSCAN
 from sklearn.decomposition import PCA
 from sklearn.model_selection import RepeatedStratifiedKFold
-from skopt import BayesSearchCV
+#from skopt import BayesSearchCV
+from nn import *
+from Data_read import *
+import seaborn as sns
+
+global acc_with_outliers, acc_without_outliers
+acc_with_outliers = np.zeros((7,1))
+acc_without_outliers = np.zeros((7,1))
 
 # def plot_score(scores,a):
 #     plt.plot(range(1,35),scores)
 #     plt.title(a)
 #     plt.show()
-    
+def plot_hist():
+    global acc_with_outliers,acc_without_outliers
+    print(acc_without_outliers)
+    print(acc_with_outliers)
+    plt.figure("Accuracy Comparison Chart")
+    plt.hist([acc_with_outliers*100, acc_without_outliers*100], color=['r','b'], alpha=0.5, label=['With outliers','Without outliers'], x=['KNN', 'Logistic Regression', 'Adaboost', 'Random Forest', 'GNB', 'SVM', 'NN'])
+    #sns.distplot(acc_with_outliers, label='With outliers', color="0.25")
+    #sns.distplot(acc_without_outliers, label='Without outliers', color="0.25")
+    plt.legend()
+    plt.show()
+    # df = np.concatenate((acc_with_outliers,acc_without_outliers),axis=1)
+    # fig, ax = plt.subplots()
+    # sns.histplot(
+    # data=df, x='value', hue='name', multiple='dodge',
+    # bins=range(1, 110, 10), ax=ax
+#)
+#ax.set_xlim([0, 100])
+
+def write_text_file(line):
+    with open('accuracy.txt', 'a') as f:
+        f.write(line)
+        f.write('\n')
+
 def plot_outliers(new_X_data,labels):
     plt.subplot(1, 2, 1)
     outliers=np.where(labels==-1)
@@ -33,14 +62,14 @@ def plot_outliers(new_X_data,labels):
     plt.plot(new_X_data.loc[:,0],new_X_data.loc[:,1],'x')
     plt.show()
 
-def outlier_removal(new_X_data,y_label):
+def outlier_removal(new_X_data,y_label,min_outliers,max_outliers, Samples):
     i=1
     while True:
-        DBSCAN_model=DBSCAN(eps=i, min_samples=80).fit(new_X_data)
+        DBSCAN_model=DBSCAN(eps=i, min_samples=Samples).fit(new_X_data)
         labels=DBSCAN_model.labels_
-        i+=1
+        i+=5
         print(len(np.where(labels==-1)[0]))
-        if len(np.where(labels==-1)[0])<=0.06*len(new_X_data) and len(np.where(labels==-1)[0])>=0.01*len(new_X_data):
+        if len(np.where(labels==-1)[0])<=max_outliers*len(new_X_data) and len(np.where(labels==-1)[0])>=min_outliers*len(new_X_data):
             print('min dist dbscan:',i)
             break
     X_datatset_no_outlier=new_X_data.loc[labels!=-1,:]
@@ -65,13 +94,18 @@ def k_nearest(X_train,X_test,y_train,y_test,a):
     plt.plot(range(1,35),scores)
     plt.title(a)
     plt.show()
+    string = 'KNN Accuracy = ' + str(scores[-1])
+    write_text_file(string)
+    return scores[-1]
     #plot_score(scores,a)
 
 def Logistic_Reg(X_train,X_test,y_train,y_test):
     clf = LogisticRegression(random_state=0).fit(X_train, y_train)
     y_pred = clf.predict(X_test)
     print('Logistic Regression Accuracy = ', metrics.accuracy_score(y_test,y_pred))
-
+    string = 'Logistic Regression Accuracy = ' + str(metrics.accuracy_score(y_test,y_pred))
+    write_text_file(string)
+    return metrics.accuracy_score(y_test,y_pred)
     # params = dict()
     # params['C'] = (1e-6, 100.0, 'log-uniform')
     # # define evaluation
@@ -88,25 +122,37 @@ def adaboost_classifier(X_train,X_test,y_train,y_test):
     clf = AdaBoostClassifier(n_estimators=100, random_state=42)
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
+    string = 'Adaboost classifier accuracy: ' +  str(metrics.accuracy_score(y_test,y_pred))
+    write_text_file(string)
     print('Adaboost classifier accuracy: ', metrics.accuracy_score(y_test,y_pred))
+    return metrics.accuracy_score(y_test,y_pred)
 
 def random_forest(X_train,X_test,y_train,y_test):
     clf = RandomForestClassifier(max_depth=150, random_state=42)
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
+    string = 'Random Forest classifier accuracy: ' + str(metrics.accuracy_score(y_test,y_pred))
+    write_text_file(string)
     print('Random Forest classifier accuracy: ', metrics.accuracy_score(y_test,y_pred))
+    return metrics.accuracy_score(y_test,y_pred)
 
 def gaussian_nb(X_train,X_test,y_train,y_test):
     clf = GaussianNB()
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
+    string = 'Gaussian Naive Bayes\' classifier accuracy: ' + str(metrics.accuracy_score(y_test,y_pred))
+    write_text_file(string)
     print('Gaussian Naive Bayes\' classifier accuracy: ', metrics.accuracy_score(y_test,y_pred))
+    return metrics.accuracy_score(y_test,y_pred)
 
 def svm(X_train,X_test,y_train,y_test):
     clf = make_pipeline(StandardScaler(), SVC(gamma='auto'))
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
+    string = 'Support Vector Machine classifier accuracy: ' + str(metrics.accuracy_score(y_test,y_pred))
+    write_text_file(string)
     print('Support Vector Machine classifier accuracy: ', metrics.accuracy_score(y_test,y_pred))
+    return metrics.accuracy_score(y_test,y_pred)
 
     # params = dict()
     # params['C'] = (1e-6, 100.0, 'log-uniform')
@@ -122,19 +168,19 @@ def svm(X_train,X_test,y_train,y_test):
     # # report the best result
     # print(search.best_score_)
 
-def main(X_data,y_label):
+def main(X_data,y_label,min_outliers,max_outliers, Samples):
     new_X_data = pca(X_data)
 
     #Performing KNN
     X_train,X_test,y_train,y_test=train_test_split(new_X_data,y_label,test_size=0.2,random_state=42)
     tit = 'With outlier'
-    k_nearest(X_train,X_test,y_train,y_test,tit)
-    Logistic_Reg(X_train,X_test,y_train,y_test)
-    adaboost_classifier(X_train,X_test,y_train,y_test)
-    random_forest(X_train,X_test,y_train,y_test)
-    gaussian_nb(X_train,X_test,y_train,y_test)
-    #svm(X_train,X_test,y_train,y_test)
-
+    acc_with_outliers[0] = k_nearest(X_train,X_test,y_train,y_test,tit)
+    acc_with_outliers[1] = Logistic_Reg(X_train,X_test,y_train,y_test)
+    acc_with_outliers[2] = adaboost_classifier(X_train,X_test,y_train,y_test)
+    acc_with_outliers[3] = random_forest(X_train,X_test,y_train,y_test)
+    acc_with_outliers[4] = gaussian_nb(X_train,X_test,y_train,y_test)
+    acc_with_outliers[5] = svm(X_train,X_test,y_train,y_test)
+    acc_with_outliers[6] = nn(X_train,X_test,y_train,y_test)
     '''
     KNN after outlier detection
     '''
@@ -142,20 +188,21 @@ def main(X_data,y_label):
     '''
     Outlier Detection using DBSCAN
     '''
-    X_datatset_no_outlier, y_label_no_outlier = outlier_removal(new_X_data,y_label)
+    X_datatset_no_outlier, y_label_no_outlier = outlier_removal(new_X_data,y_label,min_outliers,max_outliers, Samples)
 
 
     X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier=train_test_split(X_datatset_no_outlier,y_label_no_outlier,test_size=0.2,random_state=42)
     tit = 'Without outlier'
-    k_nearest(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier,tit)
-    Logistic_Reg(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
-    adaboost_classifier(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
-    random_forest(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
-    gaussian_nb(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
-    #svm(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+    acc_without_outliers[0] = k_nearest(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier,tit)
+    acc_without_outliers[1] = Logistic_Reg(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+    acc_without_outliers[2] = adaboost_classifier(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+    acc_without_outliers[3] = random_forest(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+    acc_without_outliers[4] = gaussian_nb(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+    acc_without_outliers[5] = svm(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+    acc_without_outliers[6] = nn(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier)
+
 if __name__ == '__main__':
-    australian_dataset=pd.read_csv('./Datasets/uci-australian.dat',header=None,sep=' ')
-    print(australian_dataset)
-    y_label=australian_dataset.loc[:,len(australian_dataset.columns)-1]
-    X_data=australian_dataset.drop(australian_dataset.columns[[len(australian_dataset.columns)-1]],axis=1)
-    main(X_data,y_label)
+    X_data, y_label, min_outliers, max_outliers, Samples = japan()
+    main(X_data,y_label,min_outliers,max_outliers, Samples)
+    plot_hist()
+

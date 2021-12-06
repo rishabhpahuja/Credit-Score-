@@ -1,0 +1,85 @@
+Neural Network score: 0.664
+KNN Accuracy = 0.7633587786259542
+Logistic Regression Accuracy = 0.6793893129770993
+Adaboost classifier accuracy: 0.7022900763358778
+Random Forest classifier accuracy: 0.6870229007633588
+Gaussian Naive Bayes' classifier accuracy: 0.6564885496183206
+Support Vector Machine classifier accuracy: 0.6870229007633588
+Neural Network score: 0.6641221374045801
+KNN Accuracy = 0.728
+Logistic Regression Accuracy = 0.72
+Adaboost classifier accuracy: 0.712
+Random Forest classifier accuracy: 0.68
+Gaussian Naive Bayes' classifier accuracy: 0.688
+Support Vector Machine classifier accuracy: 0.72
+Neural Network score: 0.368
+KNN Accuracy = 0.7633587786259542
+Logistic Regression Accuracy = 0.6793893129770993
+Adaboost classifier accuracy: 0.7022900763358778
+Random Forest classifier accuracy: 0.6870229007633588
+Gaussian Naive Bayes' classifier accuracy: 0.6564885496183206
+Support Vector Machine classifier accuracy: 0.6870229007633588
+Neural Network score: 0.6717557251908397
+KNN Accuracy = 0.728
+Logistic Regression Accuracy = 0.72
+Adaboost classifier accuracy: 0.712
+Random Forest classifier accuracy: 0.68
+Gaussian Naive Bayes' classifier accuracy: 0.688
+Support Vector Machine classifier accuracy: 0.72
+Neural Network score: 0.72
+KNN Accuracy = 0.7633587786259542
+Logistic Regression Accuracy = 0.6793893129770993
+Adaboost classifier accuracy: 0.7022900763358778
+Random Forest classifier accuracy: 0.6870229007633588
+Gaussian Naive Bayes' classifier accuracy: 0.6564885496183206
+Support Vector Machine classifier accuracy: 0.6870229007633588
+Neural Network score: 0.6717557251908397
+KNN Accuracy = 0.728
+Logistic Regression Accuracy = 0.72
+Adaboost classifier accuracy: 0.712
+Random Forest classifier accuracy: 0.68
+Gaussian Naive Bayes' classifier accuracy: 0.688
+Support Vector Machine classifier accuracy: 0.72
+Neural Network score: 0.52
+KNN Accuracy = 0.7633587786259542
+Logistic Regression Accuracy = 0.6793893129770993
+Adaboost classifier accuracy: 0.7022900763358778
+Random Forest classifier accuracy: 0.6870229007633588
+Gaussian Naive Bayes' classifier accuracy: 0.6564885496183206
+Support Vector Machine classifier accuracy: 0.6870229007633588
+Neural Network score: 0.6793893129770993
+KNN Accuracy = 0.728
+Logistic Regression Accuracy = 0.72
+Adaboost classifier accuracy: 0.712
+Random Forest classifier accuracy: 0.68
+Gaussian Naive Bayes' classifier accuracy: 0.688
+Support Vector Machine classifier accuracy: 0.72
+Neural Network score: 0.712
+KNN Accuracy = 0.7633587786259542
+Logistic Regression Accuracy = 0.6793893129770993
+Adaboost classifier accuracy: 0.7022900763358778
+Random Forest classifier accuracy: 0.6870229007633588
+Gaussian Naive Bayes' classifier accuracy: 0.6564885496183206
+Support Vector Machine classifier accuracy: 0.6870229007633588
+Neural Network score: 0.6335877862595419
+KNN Accuracy = 0.728
+Logistic Regression Accuracy = 0.72
+Adaboost classifier accuracy: 0.712
+Random Forest classifier accuracy: 0.68
+Gaussian Naive Bayes' classifier accuracy: 0.688
+Support Vector Machine classifier accuracy: 0.72
+Neural Network score: 0.72
+KNN Accuracy = 0.7633587786259542
+Logistic Regression Accuracy = 0.6793893129770993
+Adaboost classifier accuracy: 0.7022900763358778
+Random Forest classifier accuracy: 0.6870229007633588
+Gaussian Naive Bayes' classifier accuracy: 0.6564885496183206
+Support Vector Machine classifier accuracy: 0.6870229007633588
+Neural Network score: 0.549618320610687
+KNN Accuracy = 0.728
+Logistic Regression Accuracy = 0.72
+Adaboost classifier accuracy: 0.712
+Random Forest classifier accuracy: 0.68
+Gaussian Naive Bayes' classifier accuracy: 0.688
+Support Vector Machine classifier accuracy: 0.72
+Neural Network score: 0.704
