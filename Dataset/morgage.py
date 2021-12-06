@@ -7,10 +7,10 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
 from sklearn.cluster import DBSCAN
 
-morgage_data=pd.read_csv("./Mortgage/mortgage_new.csv")
+morgage_data=pd.read_csv("./cra-mortgage.csv")
 morgage_data=morgage_data.drop(labels=['id'],axis=1)
-morgage_label=morgage_data.loc[:,'labels']
-morgage_data=morgage_data.drop(labels=['labels'],axis=1)
+morgage_label=morgage_data.loc[:,'status_time']
+morgage_data=morgage_data.drop(labels=['status_time'],axis=1)
 
 '''
 Applying PCA
@@ -44,13 +44,13 @@ plt.plot(range(1,35),scores)
 '''
 Outlier Detection using DBSCAN
 '''
-i=5000
+i=26000
 while True:
-    DBSCAN_model=DBSCAN(eps=i, min_samples=10).fit(new_morgage_data)
+    DBSCAN_model=DBSCAN(eps=i, min_samples=30).fit(new_morgage_data)
     labels=DBSCAN_model.labels_
     i+=5
     print(len(np.where(labels==-1)[0]))
-    if len(np.where(labels==-1)[0])<=0.02*len(new_morgage_data) and len(np.where(labels==-1)[0])>=0.01*len(morgage_label):
+    if len(np.where(labels==-1)[0])<=0.01*len(new_morgage_data) and len(np.where(labels==-1)[0])>=0.005*len(morgage_label):
         print(len(np.where(labels==-1)[0]))
         print(i)
         break
