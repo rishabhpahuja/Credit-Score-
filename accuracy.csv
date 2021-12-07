@@ -1,28 +1,112 @@
-KNN,0.928030303030303,eco,With Outlier
-Logistic Regression,0.9772727272727273,eco,With Outlier
-Adaboost,0.9734848484848485,eco,With Outlier
-Random Forest,0.9696969696969697,eco,With Outlier
-Gaussian Naive Bayes,0.9696969696969697,eco,With Outlier
-Support Vector Machine,0.9128787878787878,eco,With Outlier
-Neural Network score,0.9166666666666666,eco,With Outlier
-KNN,0.952191235059761,eco,Without Outlier
-Logistic Regression,0.9960159362549801,eco,Without Outlier
-Adaboost,0.9960159362549801,eco,Without Outlier
-Random Forest,0.9920318725099602,eco,Without Outlier
-Gaussian Naive Bayes,0.9960159362549801,eco,Without Outlier
-Support Vector Machine,0.9282868525896414,eco,Without Outlier
-Neural Network score,0.9442231075697212,eco,Without Outlier
-KNN,0.7633587786259542,japan,With Outlier
-Logistic Regression,0.6793893129770993,japan,With Outlier
-Adaboost,0.7022900763358778,japan,With Outlier
-Random Forest,0.6870229007633588,japan,With Outlier
-Gaussian Naive Bayes,0.6564885496183206,japan,With Outlier
-Support Vector Machine,0.6870229007633588,japan,With Outlier
-Neural Network score,0.732824427480916,japan,With Outlier
+KNN,0.746376811594203,aus,With Outlier
+Logistic Regression,0.72463768115942,aus,With Outlier
+Adaboost,0.695652173913043,aus,With Outlier
+Random Forest,0.710144927536232,aus,With Outlier
+Gaussian Naive Bayes,0.673913043478261,aus,With Outlier
+Support Vector Machine,0.731884057971014,aus,With Outlier
+Neural Network score,0.695652173913043,aus,With Outlier
+KNN,0.753846153846154,aus,Without Outlier
+Logistic Regression,0.784615384615385,aus,Without Outlier
+Adaboost,0.669230769230769,aus,Without Outlier
+Random Forest,0.646153846153846,aus,Without Outlier
+Gaussian Naive Bayes,0.761538461538462,aus,Without Outlier
+Support Vector Machine,0.746153846153846,aus,Without Outlier
+Neural Network score,0.761538461538462,aus,Without Outlier
+KNN,0.71,german,With Outlier
+Logistic Regression,0.72,german,With Outlier
+Adaboost,0.715,german,With Outlier
+Random Forest,0.64,german,With Outlier
+Gaussian Naive Bayes,0.71,german,With Outlier
+Support Vector Machine,0.715,german,With Outlier
+Neural Network score,0.705,german,With Outlier
+KNN,0.668367346938776,german,Without Outlier
+Logistic Regression,0.668367346938776,german,Without Outlier
+Adaboost,0.663265306122449,german,Without Outlier
+Random Forest,0.622448979591837,german,Without Outlier
+Gaussian Naive Bayes,0.658163265306122,german,Without Outlier
+Support Vector Machine,0.668367346938776,german,Without Outlier
+Neural Network score,0.668367346938776,german,Without Outlier
+KNN,0.7329,pakdd,With Outlier
+Logistic Regression,0.5034,pakdd,With Outlier
+Adaboost,0.7331,pakdd,With Outlier
+Random Forest,0.6708,pakdd,With Outlier
+Gaussian Naive Bayes,0.7282,pakdd,With Outlier
+Support Vector Machine,0.7335,pakdd,With Outlier
+Neural Network score,0.7336,pakdd,With Outlier
+KNN,0.741935483870968,pakdd,Without Outlier
+Logistic Regression,0.742038544779965,pakdd,Without Outlier
+Adaboost,0.742347727506957,pakdd,Without Outlier
+Random Forest,0.681747913016593,pakdd,Without Outlier
+Gaussian Naive Bayes,0.742038544779965,pakdd,Without Outlier
+Support Vector Machine,0.742038544779965,pakdd,Without Outlier
+Neural Network score,0.742038544779965,pakdd,Without Outlier
+KNN,0.710204081632653,thomas,With Outlier
+Logistic Regression,0.497959183673469,thomas,With Outlier
+Adaboost,0.706122448979592,thomas,With Outlier
+Random Forest,0.648979591836735,thomas,With Outlier
+Gaussian Naive Bayes,0.738775510204082,thomas,With Outlier
+Support Vector Machine,0.738775510204082,thomas,With Outlier
+Neural Network score,0.714285714285714,thomas,With Outlier
+KNN,0.744588744588745,thomas,Without Outlier
+Logistic Regression,0.744588744588745,thomas,Without Outlier
+Adaboost,0.74025974025974,thomas,Without Outlier
+Random Forest,0.670995670995671,thomas,Without Outlier
+Gaussian Naive Bayes,0.744588744588745,thomas,Without Outlier
+Support Vector Machine,0.744588744588745,thomas,Without Outlier
+Neural Network score,0.744588744588745,thomas,Without Outlier
+KNN,0.817094017094017,hmeq,With Outlier
+Logistic Regression,0.503418803418803,hmeq,With Outlier
+Adaboost,0.82051282051282,hmeq,With Outlier
+Random Forest,0.812820512820513,hmeq,With Outlier
+Gaussian Naive Bayes,0.804273504273504,hmeq,With Outlier
+Support Vector Machine,0.815384615384615,hmeq,With Outlier
+Neural Network score,0.729059829059829,hmeq,With Outlier
+KNN,0.820976491862568,hmeq,Without Outlier
+Logistic Regression,0.587703435804702,hmeq,Without Outlier
+Adaboost,0.824593128390597,hmeq,Without Outlier
+Random Forest,0.805605786618445,hmeq,Without Outlier
+Gaussian Naive Bayes,0.818264014466546,hmeq,Without Outlier
+Support Vector Machine,0.820976491862568,hmeq,Without Outlier
+Neural Network score,0.812839059674503,hmeq,Without Outlier
+KNN,0.763358778625954,japan,With Outlier
+Logistic Regression,0.679389312977099,japan,With Outlier
+Adaboost,0.702290076335878,japan,With Outlier
+Random Forest,0.687022900763359,japan,With Outlier
+Gaussian Naive Bayes,0.656488549618321,japan,With Outlier
+Support Vector Machine,0.687022900763359,japan,With Outlier
+Neural Network score,0.66412213740458,japan,With Outlier
 KNN,0.728,japan,Without Outlier
 Logistic Regression,0.72,japan,Without Outlier
 Adaboost,0.712,japan,Without Outlier
 Random Forest,0.68,japan,Without Outlier
 Gaussian Naive Bayes,0.688,japan,Without Outlier
 Support Vector Machine,0.72,japan,Without Outlier
-Neural Network score,0.624,japan,Without Outlier
+Neural Network score,0.672,japan,Without Outlier
+KNN,0.646100395351623,mortgage,With Outlier
+Logistic Regression,0.65173116089613,mortgage,With Outlier
+Adaboost,0.658440158140649,mortgage,With Outlier
+Random Forest,0.610878159817899,mortgage,With Outlier
+Gaussian Naive Bayes,0.418353899604648,mortgage,With Outlier
+Support Vector Machine,0.650173715107224,mortgage,With Outlier
+Neural Network score,0.635557685395951,mortgage,With Outlier
+KNN,0.631707615205965,mortgage,Without Outlier
+Logistic Regression,0.480748074807481,mortgage,Without Outlier
+Adaboost,0.650042782055983,mortgage,Without Outlier
+Random Forest,0.607749663855274,mortgage,Without Outlier
+Gaussian Naive Bayes,0.421708837550422,mortgage,Without Outlier
+Support Vector Machine,0.644542232000978,mortgage,Without Outlier
+Neural Network score,0.639286150837306,mortgage,Without Outlier
+KNN,0.928030303030303,eco,With Outlier
+Logistic Regression,0.977272727272727,eco,With Outlier
+Adaboost,0.973484848484848,eco,With Outlier
+Random Forest,0.96969696969697,eco,With Outlier
+Gaussian Naive Bayes,0.96969696969697,eco,With Outlier
+Support Vector Machine,0.912878787878788,eco,With Outlier
+Neural Network score,0.837121212121212,eco,With Outlier
+KNN,0.952191235059761,eco,Without Outlier
+Logistic Regression,0.99601593625498,eco,Without Outlier
+Adaboost,0.99601593625498,eco,Without Outlier
+Random Forest,0.99203187250996,eco,Without Outlier
+Gaussian Naive Bayes,0.99601593625498,eco,Without Outlier
+Support Vector Machine,0.928286852589641,eco,Without Outlier
+Neural Network score,0.900398406374502,eco,Without Outlier
