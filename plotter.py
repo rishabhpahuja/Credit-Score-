@@ -11,5 +11,6 @@ for i in datasets:
     g = sns.catplot(data=new_data,kind='bar',x=0,y=1,hue=3)
     g.set(xlabel="Method",ylabel="Accuracy ",title=str('Dataset:'+i))
     g.set_xticklabels(rotation=30)
+    plt.savefig(str('accuracy_plots/'+i+'.png'),bbox_inches='tight')
     plt.show()
 
