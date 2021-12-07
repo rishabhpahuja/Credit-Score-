@@ -64,7 +64,7 @@ def pca(X_data):
     print(pca.explained_variance_ratio_)
     return pd.DataFrame(new_X_data)
 
-def k_nearest(X_train,X_test,y_train,y_test,a,data_name,flag):
+def k_nearest(X_train,X_test,y_train,y_test,data_name,flag):
     scores=list()
     for k in range(1,35):
         knn=KNeighborsClassifier(n_neighbors=k)
@@ -125,10 +125,9 @@ def main(X_data,y_label,min_outliers,max_outliers, Samples, data_name):
 
     X_train,X_test,y_train,y_test=train_test_split(new_X_data,y_label,test_size=0.2,random_state=42)
     
-    tit = 'With outlier'
     flag = 'With Outlier'
     
-    acc_with_outliers[0] = k_nearest(X_train,X_test,y_train,y_test,tit,data_name,flag)
+    acc_with_outliers[0] = k_nearest(X_train,X_test,y_train,y_test,data_name,flag)
     acc_with_outliers[1] = Logistic_Reg(X_train,X_test,y_train,y_test,data_name,flag)
     acc_with_outliers[2] = adaboost_classifier(X_train,X_test,y_train,y_test,data_name,flag)
     acc_with_outliers[3] = random_forest(X_train,X_test,y_train,y_test,data_name,flag)
@@ -139,11 +138,10 @@ def main(X_data,y_label,min_outliers,max_outliers, Samples, data_name):
     X_datatset_no_outlier, y_label_no_outlier = outlier_removal(new_X_data,y_label,min_outliers,max_outliers, Samples)
 
     X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier=train_test_split(X_datatset_no_outlier,y_label_no_outlier,test_size=0.2,random_state=42)
-    
-    tit = 'Without outlier'
+
     flag = 'Without Outlier'
     
-    acc_without_outliers[0] = k_nearest(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier,tit,data_name,flag)
+    acc_without_outliers[0] = k_nearest(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier,data_name,flag)
     acc_without_outliers[1] = Logistic_Reg(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier,data_name,flag)
     acc_without_outliers[2] = adaboost_classifier(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier,data_name,flag)
     acc_without_outliers[3] = random_forest(X_train_no_outlier,X_test_no_outlier,y_train_no_outlier,y_test_no_outlier,data_name,flag)
